@@ -1,12 +1,12 @@
 //variables global
 const formularioUI = document.querySelector(`#formulario`);
-const listaDeInscritosUI = document.getElementById(`#listaDeInscritos`);
+const InscritosUI = document.getElementById(`#Inscritos`);
 let arrayInscritos = [];
 //funciones
-const CrearItem = (inscritos) => {
+const CrearItem = (Inscritos) => {
     let Item ={
-        inscritos: inscritos,
-        estado: falso
+      Inscritos: Inscritos,
+        estado: false
     }
     arrayInscritos.push(Item);
     
@@ -14,14 +14,14 @@ const CrearItem = (inscritos) => {
 
 }
 const GuardarDB = () => {
-    localStorage.setItem('rutina', JSON.stringify(arrayInscritos));
+    localStorage.setItem('', JSON.stringify(arrayInscritos));
     
     PintarDB();
 
 }
 
 const PintarDB= () => {
-    listaDeInscritosUI.innerHTML = '';
+  InscritosUI.innerHTML = '';
 
     arrayInscritos = JSON.parse(localStorage.getItem('rutina'))
 
@@ -29,7 +29,20 @@ const PintarDB= () => {
       arrayInscritos = [];
     }else{
       arrayInscritos.array.forEach(element => {
-        
+        InscritosUI.innerHTML += `<div class="alert alert-secondary" role="alert">
+        <span class="material-symbols-outlined  mr-3">
+            sports_motorsports
+        </span>
+        <b>${element.Inscritos}</b> - ${element.estado}
+        <span class="float-right">
+            <span class="material-symbols-outlined">
+                done
+            </span>
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+        </span>
+    </div>`
       });
     }
 
@@ -39,9 +52,9 @@ const PintarDB= () => {
 formularioUI.addEventListener('submit', (e) => {
 
     e.preventDefault();
-    let inscritosUI = document.querySelector('#inscritos').value;
+    let InscritosUI = document.querySelector('#Inscritos').value;
   
-    CrearItem(inscritosUI);
+    CrearItem(InscritosUI);
     GuardarDB();
   
     formularioUI.reset();
@@ -50,7 +63,7 @@ formularioUI.addEventListener('submit', (e) => {
   
   document.addEventListener('DOMContentLoaded', PintarDB);
   
-  listaDeInscritosUI.addEventListener('click', (e) => {
+  InscritosUI.addEventListener('click', (e) => {
   
     e.preventDefault();
   
